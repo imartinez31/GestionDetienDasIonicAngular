@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ isEditMode ? 'Editar Cliente' : 'Nuevo Cliente' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">Cancelar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="customerForm" (ngSubmit)="save()">
+    <ion-item>
+      <ion-label position="stacked">Nombre del Cliente</ion-label>
+      <ion-input type="text" formControlName="name" placeholder="Ingrese el nombre"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="customerForm.get('name')?.invalid && customerForm.get('name')?.touched">
+      <small>El nombre es requerido</small>
+    </ion-text>
+
+    <ion-item>
+      <ion-label position="stacked">Domicilio</ion-label>
+      <ion-textarea formControlName="address" placeholder="Ingrese el domicilio" rows="2"></ion-textarea>
+    </ion-item>
+    <ion-text color="danger" *ngIf="customerForm.get('address')?.invalid && customerForm.get('address')?.touched">
+      <small>El domicilio es requerido</small>
+    </ion-text>
+
+    <ion-item>
+      <ion-label position="stacked">Teléfono</ion-label>
+      <ion-input type="tel" formControlName="phone" placeholder="Ingrese el teléfono"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="customerForm.get('phone')?.invalid && customerForm.get('phone')?.touched">
+      <small>El teléfono es requerido</small>
+    </ion-text>
+
+    <ion-item>
+      <ion-label position="stacked">Correo Electrónico</ion-label>
+      <ion-input type="email" formControlName="email" placeholder="correo@ejemplo.com"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="customerForm.get('email')?.invalid && customerForm.get('email')?.touched">
+      <small *ngIf="customerForm.get('email')?.errors?.['required']">El correo es requerido</small>
+      <small *ngIf="customerForm.get('email')?.errors?.['email']">Ingrese un correo válido</small>
+    </ion-text>
+
+    <ion-item>
+      <ion-label position="stacked">URL/Imagen del Cliente</ion-label>
+      <ion-input type="url" formControlName="imageUrl" placeholder="https://ejemplo.com/imagen.jpg"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="customerForm.get('imageUrl')?.invalid && customerForm.get('imageUrl')?.touched">
+      <small>La URL de la imagen es requerida</small>
+    </ion-text>
+
+    <ion-button expand="block" type="submit" [disabled]="customerForm.invalid" class="ion-margin-top">
+      {{ isEditMode ? 'Actualizar' : 'Guardar' }}
+    </ion-button>
+  </form>
+</ion-content>

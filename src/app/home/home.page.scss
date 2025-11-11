@@ -1,0 +1,33 @@
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .store-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .store-name {
+    font-size: 18px;
+    font-weight: 500;
+  }
+}
+
+.home-container {
+  padding: 16px;
+
+  ion-card {
+    margin-bottom: 16px;
+  }
+
+  ion-icon {
+    font-size: 48px;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    margin: 10px 0;
+    font-size: 18px;
+  }
+}

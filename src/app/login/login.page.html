@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Iniciar Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="login-container">
+    <ion-img src="assets/icon/favicon.png" class="logo"></ion-img>
+    <h1>Gestión de Tienda</h1>
+    <p>Inicia sesión para continuar</p>
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <ion-item>
+        <ion-label position="stacked">Nombre de Usuario</ion-label>
+        <ion-input 
+          type="text" 
+          formControlName="username"
+          placeholder="Ingrese su usuario">
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+        <small>El nombre de usuario es requerido</small>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked">Contraseña</ion-label>
+        <ion-input 
+          [type]="showPassword ? 'text' : 'password'" 
+          formControlName="password"
+          placeholder="Ingrese su contraseña">
+        </ion-input>
+        <ion-button fill="clear" slot="end" (click)="togglePasswordVisibility()">
+          <ion-icon [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-text color="danger" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+        <small>La contraseña debe tener al menos 4 caracteres</small>
+      </ion-text>
+
+      <ion-button 
+        expand="block" 
+        type="submit" 
+        [disabled]="loginForm.invalid"
+        class="ion-margin-top">
+        Iniciar Sesión
+      </ion-button>
+    </form>
+
+    <ion-button 
+      expand="block" 
+      fill="outline" 
+      routerLink="/register"
+      class="ion-margin-top">
+      ¿No tienes cuenta? Regístrate
+    </ion-button>
+  </div>
+</ion-content>

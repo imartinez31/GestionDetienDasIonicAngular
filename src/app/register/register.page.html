@@ -1,0 +1,97 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="register-container">
+    <ion-img src="assets/icon/favicon.png" class="logo"></ion-img>
+    <h1>Crear Cuenta</h1>
+    <p>Regístrate para comenzar</p>
+
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+      <ion-item>
+        <ion-label position="stacked">Nombre de Usuario</ion-label>
+        <ion-input 
+          type="text" 
+          formControlName="username"
+          placeholder="Ingrese su usuario">
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched">
+        <small>El nombre de usuario debe tener al menos 3 caracteres</small>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked">Contraseña</ion-label>
+        <ion-input 
+          [type]="showPassword ? 'text' : 'password'" 
+          formControlName="password"
+          placeholder="Ingrese su contraseña">
+        </ion-input>
+        <ion-button fill="clear" slot="end" (click)="togglePasswordVisibility()">
+          <ion-icon [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-text color="danger" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+        <small>La contraseña debe tener al menos 4 caracteres</small>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked">Confirmar Contraseña</ion-label>
+        <ion-input 
+          [type]="showConfirmPassword ? 'text' : 'password'" 
+          formControlName="confirmPassword"
+          placeholder="Confirme su contraseña">
+        </ion-input>
+        <ion-button fill="clear" slot="end" (click)="toggleConfirmPasswordVisibility()">
+          <ion-icon [name]="showConfirmPassword ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-text color="danger" *ngIf="registerForm.get('confirmPassword')?.errors?.['passwordMismatch'] && registerForm.get('confirmPassword')?.touched">
+        <small>Las contraseñas no coinciden</small>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked">Nombre de la Tienda</ion-label>
+        <ion-input 
+          type="text" 
+          formControlName="storeName"
+          placeholder="Ingrese el nombre de su tienda">
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="registerForm.get('storeName')?.invalid && registerForm.get('storeName')?.touched">
+        <small>El nombre de la tienda es requerido</small>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked">URL/Imagen de la Tienda</ion-label>
+        <ion-input 
+          type="url" 
+          formControlName="storeImageUrl"
+          placeholder="https://ejemplo.com/imagen.jpg">
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="registerForm.get('storeImageUrl')?.invalid && registerForm.get('storeImageUrl')?.touched">
+        <small>La URL de la imagen es requerida</small>
+      </ion-text>
+
+      <ion-button 
+        expand="block" 
+        type="submit" 
+        [disabled]="registerForm.invalid"
+        class="ion-margin-top">
+        Registrarse
+      </ion-button>
+    </form>
+
+    <ion-button 
+      expand="block" 
+      fill="outline" 
+      routerLink="/login"
+      class="ion-margin-top">
+      ¿Ya tienes cuenta? Inicia Sesión
+    </ion-button>
+  </div>
+</ion-content>
